@@ -674,6 +674,7 @@ export default function Timeline3D() {
           height: "100vh",
           overflow: "hidden",
           zIndex: 1,
+          touchAction: "pan-y",
         }}
       >
         {/* Loading fade-in */}
@@ -699,6 +700,7 @@ export default function Timeline3D() {
             width: "100%",
             height: "100%",
             background: "#070707",
+            touchAction: "pan-y",
           }}
         >
           <Scene progressRef={progressRef} />
