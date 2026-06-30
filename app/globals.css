@@ -40,7 +40,7 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
 }
 
 body {
@@ -140,7 +140,7 @@ body {
 }
 
 canvas {
-  touch-action: none;
+  touch-action: pan-y;
 }
 
 @keyframes float-slow {
