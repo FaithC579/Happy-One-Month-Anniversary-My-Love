@@ -17,11 +17,14 @@ export default function BackgroundMusic() {
 
     play();
 
-    const onInteraction = () => {
-      play();
+    const cleanup = () => {
       window.removeEventListener("click", onInteraction);
       window.removeEventListener("scroll", onInteraction);
       window.removeEventListener("touchstart", onInteraction);
+    };
+
+    const onInteraction = () => {
+      audio.play().then(() => cleanup()).catch(() => {});
     };
 
     window.addEventListener("click", onInteraction);
@@ -40,9 +43,7 @@ export default function BackgroundMusic() {
     window.addEventListener("resume-music", onResume);
 
     return () => {
-      window.removeEventListener("click", onInteraction);
-      window.removeEventListener("scroll", onInteraction);
-      window.removeEventListener("touchstart", onInteraction);
+      cleanup();
       window.removeEventListener("pause-music", onPause);
       window.removeEventListener("resume-music", onResume);
     };

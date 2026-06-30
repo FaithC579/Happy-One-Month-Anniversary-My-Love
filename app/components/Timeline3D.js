@@ -638,7 +638,12 @@ export default function Timeline3D() {
     }
 
     function tick() {
-      setProgress(progressRef.current);
+      // Only update state if progress changed meaningfully (avoid unnecessary re-renders)
+      const current = progressRef.current;
+      setProgress((prev) => {
+        if (Math.abs(current - prev) > 0.001) return current;
+        return prev;
+      });
       rafId.current = requestAnimationFrame(tick);
     }
 
@@ -662,6 +667,7 @@ export default function Timeline3D() {
         width: "100%",
         height: `${scrollPages * 100}vh`,
         background: "#070707",
+        touchAction: "pan-y",
       }}
       id="story"
     >
